@@ -25,7 +25,7 @@ const delays = [500, 800, 1200];
  * Get random lipsum data between 2 dates
  * @param {Date} start
  * @param {Date} end
- * @return {Map}
+ * @return {Promise}
  */
 function getData(start, end) {
   if (end <= start) {
