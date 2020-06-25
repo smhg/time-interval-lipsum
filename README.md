@@ -13,9 +13,11 @@ const getData = require('time-interval-lipsum');
 const start = new Date('2020-03-01T00:00:00');
 const end = new Date('2020-04-01T00:00:00');
 
-const data = getData(start, end);
+getData(start, end)
+	.then(data => {
+		console.log(data);
+	});
 
-console.log(data);
 /*
 Map {
   2020-03-08T23:00:00.000Z => 'Sed tristique ligula quis leo tincidunt, vel cursus tortor convallis. Aliquam erat volutpat. Mauris finibus enim orci, vulputate euismod enim molestie eu. Quisque nec scelerisque velit.',

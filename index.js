@@ -19,6 +19,8 @@ function getRandomArray(max) {
   );
 }
 
+const delays = [500, 800, 1200];
+
 /**
  * Get random lipsum data between 2 dates
  * @param {Date} start
@@ -30,17 +32,23 @@ function getData(start, end) {
     throw new Error('Invalid parameters');
   }
 
-  const intervalDays = Math.ceil((end - start) / 1000 / 60 / 60 / 24);
-  const days = getRandomArray(intervalDays);
+  const delay = delays[getRandomInt(3)];
 
-  return new Map(
-    [...days]
-      .map(day => [
-          new Date((new Date(start)).setDate(start.getDate() + day)),
-          [...getRandomArray(lipsum.length)].map(idx => lipsum[idx]).join(' ')
-      ])
-      .filter(([date, text]) => text.length > 0)
-  );
+  return new Promise(resolve => {
+    setTimeout(function () {
+      const intervalDays = Math.ceil((end - start) / 1000 / 60 / 60 / 24);
+      const days = getRandomArray(intervalDays);
+
+      resolve(new Map(
+        [...days]
+          .map(day => [
+              new Date((new Date(start)).setDate(start.getDate() + day)),
+              [...getRandomArray(lipsum.length)].map(idx => lipsum[idx]).join(' ')
+          ])
+          .filter(([date, text]) => text.length > 0)
+      ));
+    }, delay);
+  });
 }
 
 module.exports = getData;
